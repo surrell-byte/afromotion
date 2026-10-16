@@ -7,6 +7,8 @@ WebP tools package and the image source files in [`assets/images/`](./assets/ima
 
 The site includes Home, Events, Artists, Gallery, Merch, Artist Quiz, About and
 Contact pages. The 25-question artist quiz runs entirely in the browser.
+The theme selector offers Dark, Light, Ocean Breeze and Sunset Serenity, and
+saves the selection in the browser.
 
 ## Preview locally
 

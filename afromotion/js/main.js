@@ -41,21 +41,18 @@ const QUIZ=[
 const $=id=>document.getElementById(id),page=document.body.dataset.page;
 const links=NAV.map(([h,l])=>`<a href="${h}"${h.startsWith(page)?' aria-current="page"':''}>${l}</a>`).join('');
 const brand=`<a class="brand" href="index.html"><img src="assets/logo.webp" alt="" width="720" height="720"><span>Afromotion</span></a>`;
-$('top').innerHTML=`<div class="wrap bar">${brand}<button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">☼</button><button class="menu" aria-expanded="false" aria-controls="nav">Menu</button><nav id="nav">${links}<a class="btn sm" href="contact.html">Book with us</a></nav></div>`;
+$('top').innerHTML=`<div class="wrap bar">${brand}<button class="menu" aria-expanded="false" aria-controls="nav">Menu</button><nav id="nav">${links}<label class="theme-picker"><span class="sr-only">Choose a theme</span><select id="theme-picker" aria-label="Choose a theme"><option value="dark">Dark</option><option value="light">Light</option><option value="ocean">Ocean Breeze</option><option value="sunset">Sunset Serenity</option></select></label><a class="btn sm" href="contact.html">Book with us</a></nav></div>`;
 $('foot').innerHTML=`<div class="wrap">${brand}<p>Events and artists in Kuala Lumpur, Malaysia.</p><small>&copy; ${new Date().getFullYear()} Afromotion</small></div>`;
 const mb=document.querySelector('.menu'),nv=$('nav');
 mb.onclick=()=>mb.setAttribute('aria-expanded',nv.classList.toggle('open'));
-const themeToggle=document.querySelector('.theme-toggle');
+const themePicker=$('theme-picker');
 const setTheme=theme=>{
   document.documentElement.dataset.theme=theme;
-  const light=theme==='light';
-  themeToggle.textContent=light?'☾':'☼';
-  themeToggle.setAttribute('aria-label',`Switch to ${light?'dark':'light'} mode`);
-  themeToggle.setAttribute('aria-pressed',String(light));
+  themePicker.value=theme;
 };
-setTheme(document.documentElement.dataset.theme==='light'?'light':'dark');
-themeToggle.onclick=()=>{
-  const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';
+setTheme(['dark','light','ocean','sunset'].includes(document.documentElement.dataset.theme)?document.documentElement.dataset.theme:'dark');
+themePicker.onchange=()=>{
+  const theme=themePicker.value;
   localStorage.setItem('afromotion-theme',theme);
   setTheme(theme);
 };
