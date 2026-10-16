@@ -354,7 +354,7 @@ EOF
 
 # ---------------------------------------------------------------- HTML
 HEAD1='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'
-HEAD2='</title><script>const t=localStorage.getItem("afromotion-theme");document.documentElement.dataset.theme=["dark","light","ocean","sunset"].includes(t)?t:"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=12"><script src="js/main.js?v=12" defer></script></head>'
+HEAD2='</title><script>const t=localStorage.getItem("afromotion-theme");document.documentElement.dataset.theme=["dark","light","ocean","sunset"].includes(t)?t:"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=13"><script src="js/main.js?v=13" defer></script></head>'
 
 { printf '%s' "$HEAD1"; printf '%s' 'Afromotion | Afro sound, live in Kuala Lumpur'; printf '%s' "$HEAD2"; cat <<'EOF'
 <body data-page="index"><header id="top"></header><main>
