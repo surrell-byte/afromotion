@@ -196,7 +196,7 @@ EOF
 
 # ---------------------------------------------------------------- HTML
 HEAD1='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'
-HEAD2='</title><script>document.documentElement.dataset.theme=localStorage.getItem("afromotion-theme")==="light"?"light":"dark"</script><link rel="icon" href="assets/favicon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><script src="js/main.js" defer></script></head>'
+HEAD2='</title><script>document.documentElement.dataset.theme=localStorage.getItem("afromotion-theme")==="light"?"light":"dark"</script><link rel="icon" href="assets/favicon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=2"><script src="js/main.js?v=2" defer></script></head>'
 
 { printf '%s' "$HEAD1"; printf '%s' 'Afromotion | Afro sound, live in Kuala Lumpur'; printf '%s' "$HEAD2"; cat <<'EOF'
 <body data-page="index"><header id="top"></header><main>
