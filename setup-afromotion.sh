@@ -22,7 +22,8 @@ fi
 
 # ---------------------------------------------------------------- CSS
 cat > "$DIR/css/style.css" <<'EOF'
-:root{--ink:#000;--paper:#fff;--ring:#2b3037;--mute:#9aa1aa;--mist:#eceef0;--d:'Big Shoulders Display',Impact,sans-serif;--b:'Archivo',system-ui,sans-serif}
+:root{color-scheme:dark;--ink:#000;--paper:#fff;--ring:#2b3037;--mute:#9aa1aa;--mist:#eceef0;--section-muted:#4b525b;--btn-hover:var(--paper);--d:'Big Shoulders Display',Impact,sans-serif;--b:'Archivo',system-ui,sans-serif}
+:root[data-theme="light"]{color-scheme:light;--ink:#f4f1eb;--paper:#171717;--ring:#d6d0c7;--mute:#625f59;--mist:#e8e3dc;--section-muted:#aaa59c;--btn-hover:var(--ink)}
 *{box-sizing:border-box;margin:0}
 body{background:var(--ink);color:var(--paper);font:400 1.0625rem/1.6 var(--b)}
 img{max-width:100%;display:block}
@@ -42,9 +43,11 @@ header{position:sticky;top:0;z-index:9;background:var(--ink);border-bottom:1px s
 #nav a:not(.btn):hover,#nav a[aria-current]{color:var(--paper)}
 #nav a[aria-current]{box-shadow:0 2px 0 var(--paper)}
 .menu{display:none}
+.theme-toggle{width:2.75rem;height:2.75rem;display:grid;place-items:center;background:transparent;color:inherit;border:2px solid var(--ring);font:600 1.25rem var(--b);cursor:pointer}
 .btn{display:inline-block;background:var(--paper);color:var(--ink);font:600 1rem var(--b);text-decoration:none;padding:.85rem 1.6rem;border:2px solid var(--paper);cursor:pointer}
-.btn:hover{background:transparent;color:var(--paper)}
+.btn:hover{background:transparent;color:var(--btn-hover)}
 .btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+.btn.ghost:hover{color:var(--paper)}
 .dark .btn.ghost:hover{background:var(--paper);color:var(--ink)}
 .light .btn{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .light .btn:hover{background:transparent;color:var(--ink)}
@@ -65,7 +68,7 @@ section{padding-block:5rem}
 .date{font-family:var(--d);text-align:center;line-height:.9}
 .date b{display:block;font-size:3.6rem}
 .date span{font-size:1.4rem;font-weight:700}
-.meta{font-size:.95rem;color:#4b525b;margin-top:.4rem}
+.meta{font-size:.95rem;color:var(--section-muted);margin-top:.4rem}
 .chips{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem}
 .chip{font:inherit;background:none;color:var(--ink);border:2px solid var(--ink);padding:.4rem 1rem;cursor:pointer}
 .chip[aria-pressed=true]{background:var(--ink);color:var(--paper)}
@@ -95,7 +98,7 @@ form{display:grid;gap:1.1rem}
 label{display:grid;gap:.35rem;font-weight:600}
 input,select,textarea{font:inherit;padding:.8rem;border:2px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:0}
 textarea{min-height:9rem}
-.note{font-size:.9rem;color:#4b525b}
+.note{font-size:.9rem;color:var(--section-muted)}
 footer{border-top:1px solid var(--ring);padding-block:3rem;color:var(--mute)}
 footer .wrap{display:flex;justify-content:space-between;gap:1.5rem 2.5rem;flex-wrap:wrap;align-items:center}
 footer .brand{color:var(--paper)}
@@ -110,6 +113,11 @@ footer nav a:hover{color:var(--paper)}
 .ev{grid-template-columns:4rem 1fr;gap:1rem}
 .ev .btn{grid-column:2;justify-self:start}
 .menu{display:block;background:none;color:inherit;border:2px solid var(--ring);padding:.4rem .9rem;font:inherit;cursor:pointer}
+.bar{gap:.5rem}
+.brand{gap:.4rem;font-size:1.3rem}
+.brand img{width:36px;height:36px}
+.theme-toggle{flex:none;width:2.5rem;height:2.5rem}
+.menu{padding:.35rem .6rem}
 #nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--ink);flex-direction:column;align-items:flex-start;padding:1rem 1.25rem 1.5rem;border-bottom:1px solid var(--ring)}
 #nav.open{display:flex}
 }
@@ -137,10 +145,24 @@ const NAV=[['index.html','Home'],['events.html','Events'],['artists.html','Artis
 const $=id=>document.getElementById(id),page=document.body.dataset.page;
 const links=NAV.map(([h,l])=>`<a href="${h}"${h.startsWith(page)?' aria-current="page"':''}>${l}</a>`).join('');
 const brand=`<a class="brand" href="index.html"><img src="assets/logo.png" alt="" width="44" height="44"><span>Afromotion</span></a>`;
-$('top').innerHTML=`<div class="wrap bar">${brand}<button class="menu" aria-expanded="false" aria-controls="nav">Menu</button><nav id="nav">${links}<a class="btn sm" href="contact.html">Book with us</a></nav></div>`;
+$('top').innerHTML=`<div class="wrap bar">${brand}<button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">☼</button><button class="menu" aria-expanded="false" aria-controls="nav">Menu</button><nav id="nav">${links}<a class="btn sm" href="contact.html">Book with us</a></nav></div>`;
 $('foot').innerHTML=`<div class="wrap">${brand}<p>Events and artists in Kuala Lumpur, Malaysia.</p><nav>${NAV.map(([h,l])=>`<a href="${h}">${l}</a>`).join('')}</nav><small>&copy; ${new Date().getFullYear()} Afromotion</small></div>`;
 const mb=document.querySelector('.menu'),nv=$('nav');
 mb.onclick=()=>mb.setAttribute('aria-expanded',nv.classList.toggle('open'));
+const themeToggle=document.querySelector('.theme-toggle');
+const setTheme=theme=>{
+  document.documentElement.dataset.theme=theme;
+  const light=theme==='light';
+  themeToggle.textContent=light?'☾':'☼';
+  themeToggle.setAttribute('aria-label',`Switch to ${light?'dark':'light'} mode`);
+  themeToggle.setAttribute('aria-pressed',String(light));
+};
+setTheme(document.documentElement.dataset.theme==='light'?'light':'dark');
+themeToggle.onclick=()=>{
+  const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  localStorage.setItem('afromotion-theme',theme);
+  setTheme(theme);
+};
 
 const evRow=e=>{const d=new Date(e.date+'T00:00');return `<article class="ev"><div class="date"><b>${d.getDate()}</b><span>${d.toLocaleDateString('en-MY',{month:'short'})}</span></div><div><h3>${e.title}</h3><p>${e.blurb}</p><p class="meta">${e.area}. ${e.genre}. ${e.price}</p></div><a class="btn ghost sm" href="contact.html?e=${encodeURIComponent(e.title)}">Reserve a spot</a></article>`};
 const artTile=a=>`<article class="art"><div class="mono" aria-hidden="true">${a.ini}</div><h3>${a.name}</h3><p class="g">${a.genre}</p><p>${a.blurb}</p></article>`;
@@ -174,7 +196,7 @@ EOF
 
 # ---------------------------------------------------------------- HTML
 HEAD1='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'
-HEAD2='</title><link rel="icon" href="assets/favicon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><script src="js/main.js" defer></script></head>'
+HEAD2='</title><script>document.documentElement.dataset.theme=localStorage.getItem("afromotion-theme")==="light"?"light":"dark"</script><link rel="icon" href="assets/favicon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><script src="js/main.js" defer></script></head>'
 
 { printf '%s' "$HEAD1"; printf '%s' 'Afromotion | Afro sound, live in Kuala Lumpur'; printf '%s' "$HEAD2"; cat <<'EOF'
 <body data-page="index"><header id="top"></header><main>
