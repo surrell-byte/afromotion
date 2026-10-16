@@ -3,7 +3,10 @@
 The generated static website is in [`afromotion/`](./afromotion/). The source
 generator is [`setup-afromotion.sh`](./setup-afromotion.sh).
 Regenerating optimized image assets requires the `cwebp` command from the
-WebP tools package.
+WebP tools package and the image source files in [`assets/images/`](./assets/images/).
+
+The site includes Home, Events, Artists, Gallery, Merch, Artist Quiz, About and
+Contact pages. The 25-question artist quiz runs entirely in the browser.
 
 ## Preview locally
 

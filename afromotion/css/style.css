@@ -61,12 +61,21 @@ section{padding-block:5rem}
 .mono{aspect-ratio:1;border-radius:50%;border:8px double var(--ring);display:grid;place-items:center;font:800 4.5rem var(--d);margin-bottom:1.1rem}
 .art p{color:var(--mute);font-size:.98rem}
 .art .g{color:var(--paper);font-weight:600}
+.art>img{width:100%;aspect-ratio:4/5;object-fit:cover;margin-bottom:1.1rem;background:var(--ring)}
+.resident-note{margin-bottom:2rem;color:var(--mute)}
+.founders{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3rem;align-items:center}
+.founders>img{width:100%;max-height:650px;object-fit:cover}
+.profile-copy p+p{margin-top:1rem}
+.contributors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:2rem}
+.contributors article{border-top:2px solid var(--ring);padding-top:1rem}
 .gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
 .gallery figure{position:relative;overflow:hidden;background:var(--ring)}
 .gallery figure.poster{background:#240404}
 .gallery img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .3s ease}
 .gallery figure.poster img{height:auto;aspect-ratio:900/1272;object-fit:contain}
 .gallery figure:hover img{transform:scale(1.03)}
+.gallery figure.guest{background:var(--ink)}
+.gallery figure.guest img{aspect-ratio:4/5;object-fit:cover}
 .gallery figcaption{position:absolute;inset:auto 0 0;padding:2.5rem 1rem 1rem;background:linear-gradient(transparent,rgba(0,0,0,.8));font-weight:600}
 .merch-grid{display:grid;grid-template-columns:minmax(0,760px);justify-content:center;gap:2rem}
 .merch-card{border:1px solid var(--ring);padding:1rem}
@@ -83,6 +92,23 @@ label{display:grid;gap:.35rem;font-weight:600}
 input,select,textarea{font:inherit;padding:.8rem;border:2px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:0}
 textarea{min-height:9rem}
 .note{font-size:.9rem;color:var(--section-muted)}
+.quiz-shell{max-width:760px;margin-inline:auto}
+.quiz-progress{display:block;width:100%;height:.75rem;margin:1rem 0 2rem;accent-color:#a51c24}
+.quiz-round{color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.1em}
+.quiz-options{display:grid;gap:.75rem;margin:1.5rem 0;border:0}
+.quiz-option{display:flex;grid-template-columns:auto 1fr;align-items:center;gap:.75rem;border:2px solid var(--ring);padding:.9rem 1rem;cursor:pointer}
+.quiz-option:has(input:checked){border-color:currentColor;background:color-mix(in srgb,var(--paper) 10%,transparent)}
+.quiz-option input{accent-color:#a51c24}
+.quiz-feedback{min-height:2rem;margin-block:1rem}
+.quiz-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.quiz-result{text-align:center}
+.quiz-result strong{display:block;font:800 clamp(4rem,12vw,7rem)/1 var(--d)}
+.merch-price{font:800 2rem/1 var(--d);margin-block:.75rem}
+@media(max-width:1100px){
+.menu{display:block;background:none;color:inherit;border:2px solid var(--ring);padding:.4rem .9rem;font:inherit;cursor:pointer}
+#nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--ink);flex-direction:column;align-items:flex-start;padding:1rem 1.25rem 1.5rem;border-bottom:1px solid var(--ring)}
+#nav.open{display:flex}
+}
 footer{border-top:1px solid var(--ring);padding-block:3rem;color:var(--mute)}
 footer .wrap{display:flex;justify-content:space-between;gap:1.5rem 2.5rem;flex-wrap:wrap;align-items:center}
 footer .brand{color:var(--paper)}
@@ -90,7 +116,7 @@ footer nav{display:flex;gap:1.25rem;flex-wrap:wrap}
 footer nav a{text-decoration:none}
 footer nav a:hover{color:var(--paper)}
 @media(max-width:800px){
-.hero,.two{grid-template-columns:1fr}
+.hero,.two,.founders{grid-template-columns:1fr}
 .hero{min-height:0}
 .hero img{width:min(70%,320px);order:-1}
 .event-feature .wrap{grid-template-columns:1fr}
