@@ -4,8 +4,10 @@ The generated static website is in [`afromotion/`](./afromotion/). The source
 generator is [`setup-afromotion.sh`](./setup-afromotion.sh).
 Regenerating optimized image assets requires the `cwebp` command from the
 WebP tools package and the image source files in [`assets/images/`](./assets/images/).
+The homepage hero uses `kl-bg-desktop.png` and `kl-bg-phone.png` from that
+folder for desktop and mobile backgrounds.
 
-The site includes Home, Events, Artists, Gallery, Merch, Artist Quiz, About and
+The site includes Home, Events, Artists, Gallery, Merch, Quiz, About and
 Contact pages. The 25-question artist quiz runs entirely in the browser.
 The theme selector offers Dark, Light, Ocean Breeze and Sunset Serenity, and
 saves the selection in the browser.

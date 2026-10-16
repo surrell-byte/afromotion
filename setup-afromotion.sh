@@ -37,6 +37,8 @@ if [ -f "$HERE/assets/images/am-logo.png" ]; then
   cwebp -resize 1000 0 -q 80 "$HERE/assets/images/having fun 1.png" -o "$DIR/assets/gallery-event-1.webp" >/dev/null 2>&1
   cwebp -resize 1000 0 -q 80 "$HERE/assets/images/having fun 2.png" -o "$DIR/assets/gallery-event-2.webp" >/dev/null 2>&1
   cwebp -resize 1000 0 -q 80 "$HERE/assets/images/having fun 3.png" -o "$DIR/assets/gallery-event-3.webp" >/dev/null 2>&1
+  cwebp -resize 1800 0 -q 82 "$HERE/assets/images/kl-bg-desktop.png" -o "$DIR/assets/kl-bg-desktop.webp" >/dev/null 2>&1
+  cwebp -resize 1200 0 -q 82 "$HERE/assets/images/kl-bg-phone.png" -o "$DIR/assets/kl-bg-phone.webp" >/dev/null 2>&1
 else
   echo "Note: put am-logo.png next to this script and re-run to add the logo."
   exit 1
@@ -77,7 +79,7 @@ p{max-width:62ch}
 header{position:sticky;top:0;z-index:9;background:var(--ink);border-bottom:1px solid var(--ring)}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.5rem}
 .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;font:800 1.6rem var(--d);letter-spacing:.04em}
-.brand img{flex:none;width:44px;height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%}
+.brand img{flex:none;width:44px;height:44px;aspect-ratio:1;object-fit:contain;border-radius:50%}
 #nav{display:flex;align-items:center;gap:1.5rem}
 #nav a:not(.btn){text-decoration:none;color:var(--mute);padding-block:.5rem}
 #nav a:not(.btn):hover,#nav a[aria-current]{color:var(--paper)}
@@ -96,10 +98,10 @@ header{position:sticky;top:0;z-index:9;background:var(--ink);border-bottom:1px s
 .light .btn.ghost{background:transparent;color:var(--ink)}
 .light .btn.ghost:hover{background:var(--ink);color:var(--paper)}
 .btn.sm{padding:.55rem 1.1rem;font-size:.95rem}
-.hero{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:2rem;min-height:calc(100svh - 62px);padding-block:3rem}
-.hero p{font-size:1.25rem;color:var(--mute);margin:1.5rem 0 2rem}
+.hero{position:relative;isolation:isolate;width:100%;padding-inline:max(calc((100% - 1120px)/2),1.25rem);display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:2rem;min-height:calc(100svh - 62px);padding-block:3rem;background:linear-gradient(90deg,rgba(0,0,0,.62),rgba(0,0,0,.22)),url('../assets/kl-bg-desktop.webp') center/cover no-repeat;color:#fff}
+.hero p{font-size:1.25rem;color:rgba(255,255,255,.88);margin:1.5rem 0 2rem}
 .acts{display:flex;gap:1rem;flex-wrap:wrap}
-.hero img{width:min(100%,520px);height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%;margin-inline:auto;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) both}
+.hero img{width:min(100%,520px);height:auto;aspect-ratio:1;object-fit:contain;border-radius:50%;margin-inline:auto;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) both}
 @keyframes rise{from{opacity:0;transform:scale(.88) rotate(-6deg)}}
 section{padding-block:5rem}
 .head{padding-block:4rem 5rem}
@@ -185,6 +187,7 @@ footer nav a:hover{color:var(--paper)}
 @media(max-width:800px){
 .hero,.two,.founders{grid-template-columns:1fr}
 .hero{min-height:0}
+.hero{background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.58)),url('../assets/kl-bg-phone.webp')}
 .hero img{width:min(70%,320px);order:-1}
 .event-feature .wrap{grid-template-columns:1fr}
 .event-feature img{width:min(75%,320px)}
@@ -194,7 +197,7 @@ footer nav a:hover{color:var(--paper)}
 .menu{display:block;background:none;color:inherit;border:2px solid var(--ring);padding:.4rem .9rem;font:inherit;cursor:pointer}
 .bar{gap:.5rem}
 .brand{gap:.4rem;font-size:1.3rem}
-.brand img{width:36px;height:auto}
+.brand img{width:36px;height:36px}
 .theme-picker select{min-height:2.5rem}
 .menu{padding:.35rem .6rem}
 #nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--ink);flex-direction:column;align-items:flex-start;padding:1rem 1.25rem 1.5rem;border-bottom:1px solid var(--ring)}
@@ -221,7 +224,7 @@ const ARTISTS=[
 {name:'Darling Sabrina',ini:'DS',genre:'Founder · Resident DJ · Amapiano',image:'assets/artist-darling-sabrina.webp',alt:'Darling Sabrina, Afromotion founder and resident DJ',blurb:'Singaporean DJ known as the #1 Amapiano Loving Queen.'},
 {name:'DJ Pedro OIE',ini:'PO',genre:'Resident DJ · Events',image:'assets/artist-dj-pedro.webp',alt:'DJ Pedro OIE, Afromotion resident DJ',blurb:'A resident DJ, key contributor and long-term member of Afromotion.'},
 {name:'Novxlist',ini:'N',genre:'DJ · Producer',image:'assets/artist-novxlist.webp',alt:'Novxlist, Afromotion roster artist',blurb:'Afromotion roster artist bringing a distinct sound to the stage.'}];
-const NAV=[['index.html','Home'],['events.html','Events'],['artists.html','Artists'],['gallery.html','Gallery'],['merch.html','Merch'],['quiz.html','Artist Quiz'],['about.html','About'],['contact.html','Contact']];
+const NAV=[['index.html','Home'],['events.html','Events'],['artists.html','Artists'],['gallery.html','Gallery'],['merch.html','Merch'],['quiz.html','Quiz'],['about.html','About'],['contact.html','Contact']];
 const QUIZ=[
 ['Chley','Which music genre is Chley primarily associated with?',['Maskandi','Gospel','Amapiano','Kwaito'],2],
 ['Chley','Which Tanzanian artist collaborated with Chley on “Komasava (Comment Ça Va)”?',['Diamond Platnumz','Burna Boy','Davido','Wizkid'],0],
@@ -347,7 +350,7 @@ EOF
 
 # ---------------------------------------------------------------- HTML
 HEAD1='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'
-HEAD2='</title><script>const t=localStorage.getItem("afromotion-theme");document.documentElement.dataset.theme=["dark","light","ocean","sunset"].includes(t)?t:"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=8"><script src="js/main.js?v=8" defer></script></head>'
+HEAD2='</title><script>const t=localStorage.getItem("afromotion-theme");document.documentElement.dataset.theme=["dark","light","ocean","sunset"].includes(t)?t:"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=9"><script src="js/main.js?v=9" defer></script></head>'
 
 { printf '%s' "$HEAD1"; printf '%s' 'Afromotion | Afro sound, live in Kuala Lumpur'; printf '%s' "$HEAD2"; cat <<'EOF'
 <body data-page="index"><header id="top"></header><main>
@@ -378,7 +381,7 @@ HEAD2='</title><script>const t=localStorage.getItem("afromotion-theme");document
   <h2>On the roster</h2>
   <div class="grid" id="feat"></div>
   <p class="more"><a class="btn ghost" href="artists.html">Meet every artist</a></p>
-  <p class="more"><a class="btn ghost" href="gallery.html">See the gallery</a> <a class="btn ghost" href="merch.html">Shop merch</a> <a class="btn ghost" href="quiz.html">Play the artist quiz</a></p>
+  <p class="more"><a class="btn ghost" href="gallery.html">See the gallery</a> <a class="btn ghost" href="merch.html">Shop merch</a> <a class="btn ghost" href="quiz.html">Play the quiz</a></p>
 </div></section>
 <section class="light"><div class="wrap">
   <h2>Planning a night in KL?</h2>
@@ -416,9 +419,9 @@ EOF
 EOF
 } > "$DIR/artists.html"
 
-{ printf '%s' "$HEAD1"; printf '%s' 'Artist Quiz | Afromotion'; printf '%s' "$HEAD2"; cat <<'EOF'
+{ printf '%s' "$HEAD1"; printf '%s' 'Quiz | Afromotion'; printf '%s' "$HEAD2"; cat <<'EOF'
 <body data-page="quiz"><header id="top"></header><main>
-<div class="wrap head"><h1>Know your artists?</h1><p>Take the Afromotion artist quiz: 25 questions across five rounds. See how well you know the artists who have hosted our events.</p></div>
+<div class="wrap head"><h1>Quiz</h1><p>Take the Afromotion quiz: 25 questions across five rounds. See how well you know the artists who have hosted our events.</p></div>
 <section class="light"><div class="wrap quiz-shell">
   <div id="quiz" aria-live="polite"></div>
 </div></section>

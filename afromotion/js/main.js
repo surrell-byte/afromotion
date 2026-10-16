@@ -10,7 +10,7 @@ const ARTISTS=[
 {name:'Darling Sabrina',ini:'DS',genre:'Founder · Resident DJ · Amapiano',image:'assets/artist-darling-sabrina.webp',alt:'Darling Sabrina, Afromotion founder and resident DJ',blurb:'Singaporean DJ known as the #1 Amapiano Loving Queen.'},
 {name:'DJ Pedro OIE',ini:'PO',genre:'Resident DJ · Events',image:'assets/artist-dj-pedro.webp',alt:'DJ Pedro OIE, Afromotion resident DJ',blurb:'A resident DJ, key contributor and long-term member of Afromotion.'},
 {name:'Novxlist',ini:'N',genre:'DJ · Producer',image:'assets/artist-novxlist.webp',alt:'Novxlist, Afromotion roster artist',blurb:'Afromotion roster artist bringing a distinct sound to the stage.'}];
-const NAV=[['index.html','Home'],['events.html','Events'],['artists.html','Artists'],['gallery.html','Gallery'],['merch.html','Merch'],['quiz.html','Artist Quiz'],['about.html','About'],['contact.html','Contact']];
+const NAV=[['index.html','Home'],['events.html','Events'],['artists.html','Artists'],['gallery.html','Gallery'],['merch.html','Merch'],['quiz.html','Quiz'],['about.html','About'],['contact.html','Contact']];
 const QUIZ=[
 ['Chley','Which music genre is Chley primarily associated with?',['Maskandi','Gospel','Amapiano','Kwaito'],2],
 ['Chley','Which Tanzanian artist collaborated with Chley on “Komasava (Comment Ça Va)”?',['Diamond Platnumz','Burna Boy','Davido','Wizkid'],0],
