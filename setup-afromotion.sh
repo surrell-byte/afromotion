@@ -120,6 +120,7 @@ section{padding-block:5rem}
 .date b{display:block;font-size:3.6rem}
 .date span{font-size:1.4rem;font-weight:700}
 .meta{font-size:.95rem;color:var(--section-muted);margin-top:.4rem}
+.light .meta,.light .note{color:var(--ink)}
 .chips{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem}
 .chip{font:inherit;background:none;color:var(--ink);border:2px solid var(--ink);padding:.4rem 1rem;cursor:pointer}
 .chip[aria-pressed=true]{background:var(--ink);color:var(--paper)}
@@ -353,7 +354,7 @@ EOF
 
 # ---------------------------------------------------------------- HTML
 HEAD1='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'
-HEAD2='</title><script>const t=localStorage.getItem("afromotion-theme");document.documentElement.dataset.theme=["dark","light","ocean","sunset"].includes(t)?t:"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=10"><script src="js/main.js?v=10" defer></script></head>'
+HEAD2='</title><script>const t=localStorage.getItem("afromotion-theme");document.documentElement.dataset.theme=["dark","light","ocean","sunset"].includes(t)?t:"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=11"><script src="js/main.js?v=11" defer></script></head>'
 
 { printf '%s' "$HEAD1"; printf '%s' 'Afromotion | Afro sound, live in Kuala Lumpur'; printf '%s' "$HEAD2"; cat <<'EOF'
 <body data-page="index"><header id="top"></header><main>
