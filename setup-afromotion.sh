@@ -102,10 +102,10 @@ section{padding-block:5rem}
 .gallery figure.poster img{height:auto;aspect-ratio:900/1272;object-fit:contain}
 .gallery figure:hover img{transform:scale(1.03)}
 .gallery figcaption{position:absolute;inset:auto 0 0;padding:2.5rem 1rem 1rem;background:linear-gradient(transparent,rgba(0,0,0,.8));font-weight:600}
-.merch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:2rem}
+.merch-grid{display:grid;grid-template-columns:minmax(0,760px);justify-content:center;gap:2rem}
 .merch-card{border:1px solid var(--ring);padding:1rem}
 .merch-photos{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1rem}
-.merch-photos img{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--ring)}
+.merch-photos img{width:100%;height:auto;aspect-ratio:900/1135;object-fit:cover;background:var(--ring)}
 .merch-card p{color:var(--mute)}
 .merch-card .btn{margin-top:1rem}
 .eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.85rem;font-weight:600;color:var(--mute)}
@@ -140,6 +140,10 @@ footer nav a:hover{color:var(--paper)}
 .menu{padding:.35rem .6rem}
 #nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--ink);flex-direction:column;align-items:flex-start;padding:1rem 1.25rem 1.5rem;border-bottom:1px solid var(--ring)}
 #nav.open{display:flex}
+}
+@media(max-width:520px){
+.merch-photos{grid-template-columns:1fr;gap:1rem}
+.merch-photos img{width:min(100%,360px);justify-self:center}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
 EOF
@@ -216,7 +220,7 @@ EOF
 
 # ---------------------------------------------------------------- HTML
 HEAD1='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'
-HEAD2='</title><script>document.documentElement.dataset.theme=localStorage.getItem("afromotion-theme")==="light"?"light":"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=4"><script src="js/main.js?v=5" defer></script></head>'
+HEAD2='</title><script>document.documentElement.dataset.theme=localStorage.getItem("afromotion-theme")==="light"?"light":"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=5"><script src="js/main.js?v=6" defer></script></head>'
 
 { printf '%s' "$HEAD1"; printf '%s' 'Afromotion | Afro sound, live in Kuala Lumpur'; printf '%s' "$HEAD2"; cat <<'EOF'
 <body data-page="index"><header id="top"></header><main>
