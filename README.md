@@ -2,6 +2,8 @@
 
 The generated static website is in [`afromotion/`](./afromotion/). The source
 generator is [`setup-afromotion.sh`](./setup-afromotion.sh).
+Regenerating optimized image assets requires the `cwebp` command from the
+WebP tools package.
 
 ## Preview locally
 

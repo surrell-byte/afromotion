@@ -7,17 +7,27 @@ DIR="${1:-afromotion}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 mkdir -p "$DIR"/{css,js,assets}
 
+if ! command -v cwebp >/dev/null 2>&1; then
+  echo "Error: cwebp is required to optimize site images. Install WebP tools and rerun." >&2
+  exit 1
+fi
+
 if [ -f "$HERE/assets/images/am-logo.png" ]; then
-  cp "$HERE/assets/images/am-logo.png" "$DIR/assets/logo.png"
-  cp "$HERE/assets/images/am-favicon.png" "$DIR/assets/favicon.png"
-  cp "$HERE/assets/images/Screenshot 2026-10-16 at 01.28.45.png" "$DIR/assets/merch-back.png"
-  cp "$HERE/assets/images/Screenshot 2026-10-16 at 01.29.05.png" "$DIR/assets/merch-front.png"
-  cp "$HERE/assets/images/Screenshot 2026-10-16 at 01.30.11.png" "$DIR/assets/gallery-dancefloor.png"
-  cp "$HERE/assets/images/Screenshot 2026-10-16 at 01.30.22.png" "$DIR/assets/gallery-crowd.png"
-  cp "$HERE/assets/images/Screenshot 2026-10-16 at 01.31.27.png" "$DIR/assets/gallery-vuka-poster.png"
-  cp "$HERE/assets/images/Screenshot 2026-10-16 at 01.31.42.png" "$DIR/assets/gallery-vuka-tables.png"
+  rm -f "$DIR/assets/logo.png" "$DIR/assets/favicon.png" \
+    "$DIR/assets/merch-back.png" "$DIR/assets/merch-front.png" \
+    "$DIR/assets/gallery-dancefloor.png" "$DIR/assets/gallery-crowd.png" \
+    "$DIR/assets/gallery-vuka-poster.png" "$DIR/assets/gallery-vuka-tables.png"
+  cwebp -resize 720 0 -q 88 "$HERE/assets/images/am-logo.png" -o "$DIR/assets/logo.webp" >/dev/null
+  cwebp -resize 128 0 -q 88 "$HERE/assets/images/am-favicon.png" -o "$DIR/assets/favicon.webp" >/dev/null
+  cwebp -resize 900 0 -q 82 "$HERE/assets/images/Screenshot 2026-10-16 at 01.28.45.png" -o "$DIR/assets/merch-back.webp" >/dev/null
+  cwebp -resize 900 0 -q 82 "$HERE/assets/images/Screenshot 2026-10-16 at 01.29.05.png" -o "$DIR/assets/merch-front.webp" >/dev/null
+  cwebp -resize 1200 0 -q 82 "$HERE/assets/images/Screenshot 2026-10-16 at 01.30.11.png" -o "$DIR/assets/gallery-dancefloor.webp" >/dev/null
+  cwebp -resize 1200 0 -q 82 "$HERE/assets/images/Screenshot 2026-10-16 at 01.30.22.png" -o "$DIR/assets/gallery-crowd.webp" >/dev/null
+  cwebp -resize 900 0 -q 88 "$HERE/assets/images/Screenshot 2026-10-16 at 01.31.27.png" -o "$DIR/assets/gallery-vuka-poster.webp" >/dev/null
+  cwebp -resize 900 0 -q 88 "$HERE/assets/images/Screenshot 2026-10-16 at 01.31.42.png" -o "$DIR/assets/gallery-vuka-tables.webp" >/dev/null
 else
   echo "Note: put am-logo.png next to this script and re-run to add the logo."
+  exit 1
 fi
 
 # ---------------------------------------------------------------- CSS
@@ -38,6 +48,7 @@ p{max-width:62ch}
 header{position:sticky;top:0;z-index:9;background:var(--ink);border-bottom:1px solid var(--ring)}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.5rem}
 .brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;font:800 1.6rem var(--d);letter-spacing:.04em}
+.brand img{flex:none;width:44px;height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%}
 #nav{display:flex;align-items:center;gap:1.5rem}
 #nav a:not(.btn){text-decoration:none;color:var(--mute);padding-block:.5rem}
 #nav a:not(.btn):hover,#nav a[aria-current]{color:var(--paper)}
@@ -57,12 +68,19 @@ header{position:sticky;top:0;z-index:9;background:var(--ink);border-bottom:1px s
 .hero{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:2rem;min-height:calc(100svh - 62px);padding-block:3rem}
 .hero p{font-size:1.25rem;color:var(--mute);margin:1.5rem 0 2rem}
 .acts{display:flex;gap:1rem;flex-wrap:wrap}
-.hero img{width:min(100%,520px);margin-inline:auto;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) both}
+.hero img{width:min(100%,520px);height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%;margin-inline:auto;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) both}
 @keyframes rise{from{opacity:0;transform:scale(.88) rotate(-6deg)}}
 section{padding-block:5rem}
 .head{padding-block:4rem 5rem}
 .head p{color:var(--mute);font-size:1.2rem;margin-top:1.25rem}
 .light{background:var(--paper);color:var(--ink);clip-path:polygon(0 4vw,50% 0,100% 4vw,100% 100%,0 100%);padding-top:calc(4vw + 4rem)}
+.event-feature{background:#7c1015;color:#fff;padding-block:clamp(2.5rem,7vw,5rem)}
+.event-feature .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(2rem,5vw,4rem);align-items:center}
+.event-feature img{width:min(100%,390px);height:auto;justify-self:center}
+.event-feature .eyebrow{color:#ffd6d6}
+.event-feature h2{margin-top:.5rem}
+.event-feature p{margin-top:1rem}
+.event-feature .lineup{font-weight:600}
 .ev{display:grid;grid-template-columns:5.5rem 1fr auto;gap:1.5rem;align-items:center;padding-block:1.5rem;border-top:2px solid var(--ink)}
 .ev:last-child{border-bottom:2px solid var(--ink)}
 .date{font-family:var(--d);text-align:center;line-height:.9}
@@ -81,7 +99,7 @@ section{padding-block:5rem}
 .gallery figure{position:relative;overflow:hidden;background:var(--ring)}
 .gallery figure.poster{background:#240404}
 .gallery img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .3s ease}
-.gallery figure.poster img{object-fit:contain}
+.gallery figure.poster img{height:auto;aspect-ratio:900/1272;object-fit:contain}
 .gallery figure:hover img{transform:scale(1.03)}
 .gallery figcaption{position:absolute;inset:auto 0 0;padding:2.5rem 1rem 1rem;background:linear-gradient(transparent,rgba(0,0,0,.8));font-weight:600}
 .merch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:2rem}
@@ -109,13 +127,15 @@ footer nav a:hover{color:var(--paper)}
 .hero,.two{grid-template-columns:1fr}
 .hero{min-height:0}
 .hero img{width:min(70%,320px);order:-1}
+.event-feature .wrap{grid-template-columns:1fr}
+.event-feature img{width:min(75%,320px)}
 .gallery{grid-template-columns:1fr}
 .ev{grid-template-columns:4rem 1fr;gap:1rem}
 .ev .btn{grid-column:2;justify-self:start}
 .menu{display:block;background:none;color:inherit;border:2px solid var(--ring);padding:.4rem .9rem;font:inherit;cursor:pointer}
 .bar{gap:.5rem}
 .brand{gap:.4rem;font-size:1.3rem}
-.brand img{width:36px;height:36px}
+.brand img{width:36px;height:auto}
 .theme-toggle{flex:none;width:2.5rem;height:2.5rem}
 .menu{padding:.35rem .6rem}
 #nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--ink);flex-direction:column;align-items:flex-start;padding:1rem 1.25rem 1.5rem;border-bottom:1px solid var(--ring)}
@@ -144,7 +164,7 @@ const ARTISTS=[
 const NAV=[['index.html','Home'],['events.html','Events'],['artists.html','Artists'],['gallery.html','Gallery'],['merch.html','Merch'],['about.html','About'],['contact.html','Contact']];
 const $=id=>document.getElementById(id),page=document.body.dataset.page;
 const links=NAV.map(([h,l])=>`<a href="${h}"${h.startsWith(page)?' aria-current="page"':''}>${l}</a>`).join('');
-const brand=`<a class="brand" href="index.html"><img src="assets/logo.png" alt="" width="44" height="44"><span>Afromotion</span></a>`;
+const brand=`<a class="brand" href="index.html"><img src="assets/logo.webp" alt="" width="720" height="720"><span>Afromotion</span></a>`;
 $('top').innerHTML=`<div class="wrap bar">${brand}<button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">☼</button><button class="menu" aria-expanded="false" aria-controls="nav">Menu</button><nav id="nav">${links}<a class="btn sm" href="contact.html">Book with us</a></nav></div>`;
 $('foot').innerHTML=`<div class="wrap">${brand}<p>Events and artists in Kuala Lumpur, Malaysia.</p><nav>${NAV.map(([h,l])=>`<a href="${h}">${l}</a>`).join('')}</nav><small>&copy; ${new Date().getFullYear()} Afromotion</small></div>`;
 const mb=document.querySelector('.menu'),nv=$('nav');
@@ -171,11 +191,11 @@ if($('next'))$('next').innerHTML=EVENTS.slice(0,3).map(evRow).join('');
 if($('feat'))$('feat').innerHTML=ARTISTS.slice(0,4).map(artTile).join('');
 if($('artists'))$('artists').innerHTML=ARTISTS.map(artTile).join('');
 if($('gallery'))$('gallery').innerHTML=[
-  ['assets/gallery-dancefloor.png','Dancefloor moments','Afromotion nights'],
-  ['assets/gallery-crowd.png','Together on the dancefloor','Afromotion nights'],
-  ['assets/gallery-vuka-poster.png','Vuka 4.0 event poster','Event artwork','poster'],
-  ['assets/gallery-vuka-tables.png','Vuka 4.0 table layout','Event artwork','poster']
-].map(([src,alt,caption,style])=>`<figure class="${style||''}"><img src="${src}" alt="${alt}" loading="lazy"><figcaption>${caption}</figcaption></figure>`).join('');
+  ['assets/gallery-dancefloor.webp','Dancefloor moments','Afromotion nights','',1200,1214],
+  ['assets/gallery-crowd.webp','Together on the dancefloor','Afromotion nights','',1200,1214],
+  ['assets/gallery-vuka-poster.webp','Vuka 4.0 event poster','Event artwork','poster',900,1272],
+  ['assets/gallery-vuka-tables.webp','Vuka 4.0 table layout','Event artwork','poster',900,1272]
+].map(([src,alt,caption,style,width,height])=>`<figure class="${style}"><img src="${src}" alt="${alt}" loading="lazy" decoding="async" width="${width}" height="${height}"><figcaption>${caption}</figcaption></figure>`).join('');
 if($('events')){
   const genres=['All',...new Set(EVENTS.map(e=>e.genre))];
   const show=g=>{$('events').innerHTML=EVENTS.filter(e=>g==='All'||e.genre===g).map(evRow).join('');
@@ -196,7 +216,7 @@ EOF
 
 # ---------------------------------------------------------------- HTML
 HEAD1='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'
-HEAD2='</title><script>document.documentElement.dataset.theme=localStorage.getItem("afromotion-theme")==="light"?"light":"dark"</script><link rel="icon" href="assets/favicon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=2"><script src="js/main.js?v=2" defer></script></head>'
+HEAD2='</title><script>document.documentElement.dataset.theme=localStorage.getItem("afromotion-theme")==="light"?"light":"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=4"><script src="js/main.js?v=4" defer></script></head>'
 
 { printf '%s' "$HEAD1"; printf '%s' 'Afromotion | Afro sound, live in Kuala Lumpur'; printf '%s' "$HEAD2"; cat <<'EOF'
 <body data-page="index"><header id="top"></header><main>
@@ -206,8 +226,18 @@ HEAD2='</title><script>document.documentElement.dataset.theme=localStorage.getIt
     <p>Afromotion hosts events and artists across KL, from rooftop sundowners to full-night shows.</p>
     <div class="acts"><a class="btn" href="events.html">See upcoming events</a><a class="btn ghost" href="contact.html">Book an artist</a></div>
   </div>
-  <img src="assets/logo.png" alt="Afromotion logo" width="520" height="520">
+  <img src="assets/logo.webp" alt="Afromotion circular logo" width="720" height="720" fetchpriority="high">
 </div>
+<section class="event-feature" aria-labelledby="featured-event-title"><div class="wrap">
+  <img src="assets/gallery-vuka-poster.webp" alt="Vuka 4.0 event poster for Thursday, 22 October 2026" width="900" height="1272" fetchpriority="high">
+  <div>
+    <p class="eyebrow">Upcoming · Thursday, 22 October 2026 · 10 PM till late</p>
+    <h2 id="featured-event-title">Vuka 4.0</h2>
+    <p>S3R Management and Afromotion present a night of Afrobeats, Amapiano, Afrohouse, 3 Step, Gqom, Bacardi, Hiplife, Azonto and Afroswing.</p>
+    <p class="lineup">Darling Sabrina · DJ Pedro · DJ Jacob · The Novxlist · MC Popolly</p>
+    <p><a class="btn" href="contact.html?e=Vuka%204.0">Ask about the event</a></p>
+  </div>
+</div></section>
 <section class="light"><div class="wrap">
   <h2>Coming up</h2>
   <div id="next"></div>
@@ -268,8 +298,8 @@ EOF
 <section class="dark"><div class="wrap merch-grid">
   <article class="merch-card">
     <div class="merch-photos">
-      <img src="assets/merch-front.png" alt="Front of the black Afromotion logo T-shirt" loading="lazy">
-      <img src="assets/merch-back.png" alt="Back of the black Afromotion T-shirt with a large circular print" loading="lazy">
+      <img src="assets/merch-front.webp" alt="Front of the black Afromotion logo T-shirt" loading="lazy" decoding="async" width="900" height="1135">
+      <img src="assets/merch-back.webp" alt="Back of the black Afromotion T-shirt with a large circular print" loading="lazy" decoding="async" width="900" height="1135">
     </div>
     <p class="eyebrow">Afromotion essentials</p>
     <h2>Logo T-shirt</h2>

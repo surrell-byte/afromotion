@@ -16,7 +16,7 @@ const ARTISTS=[
 const NAV=[['index.html','Home'],['events.html','Events'],['artists.html','Artists'],['gallery.html','Gallery'],['merch.html','Merch'],['about.html','About'],['contact.html','Contact']];
 const $=id=>document.getElementById(id),page=document.body.dataset.page;
 const links=NAV.map(([h,l])=>`<a href="${h}"${h.startsWith(page)?' aria-current="page"':''}>${l}</a>`).join('');
-const brand=`<a class="brand" href="index.html"><img src="assets/logo.png" alt="" width="44" height="44"><span>Afromotion</span></a>`;
+const brand=`<a class="brand" href="index.html"><img src="assets/logo.webp" alt="" width="720" height="720"><span>Afromotion</span></a>`;
 $('top').innerHTML=`<div class="wrap bar">${brand}<button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">☼</button><button class="menu" aria-expanded="false" aria-controls="nav">Menu</button><nav id="nav">${links}<a class="btn sm" href="contact.html">Book with us</a></nav></div>`;
 $('foot').innerHTML=`<div class="wrap">${brand}<p>Events and artists in Kuala Lumpur, Malaysia.</p><nav>${NAV.map(([h,l])=>`<a href="${h}">${l}</a>`).join('')}</nav><small>&copy; ${new Date().getFullYear()} Afromotion</small></div>`;
 const mb=document.querySelector('.menu'),nv=$('nav');
@@ -43,11 +43,11 @@ if($('next'))$('next').innerHTML=EVENTS.slice(0,3).map(evRow).join('');
 if($('feat'))$('feat').innerHTML=ARTISTS.slice(0,4).map(artTile).join('');
 if($('artists'))$('artists').innerHTML=ARTISTS.map(artTile).join('');
 if($('gallery'))$('gallery').innerHTML=[
-  ['assets/gallery-dancefloor.png','Dancefloor moments','Afromotion nights'],
-  ['assets/gallery-crowd.png','Together on the dancefloor','Afromotion nights'],
-  ['assets/gallery-vuka-poster.png','Vuka 4.0 event poster','Event artwork','poster'],
-  ['assets/gallery-vuka-tables.png','Vuka 4.0 table layout','Event artwork','poster']
-].map(([src,alt,caption,style])=>`<figure class="${style||''}"><img src="${src}" alt="${alt}" loading="lazy"><figcaption>${caption}</figcaption></figure>`).join('');
+  ['assets/gallery-dancefloor.webp','Dancefloor moments','Afromotion nights','',1200,1214],
+  ['assets/gallery-crowd.webp','Together on the dancefloor','Afromotion nights','',1200,1214],
+  ['assets/gallery-vuka-poster.webp','Vuka 4.0 event poster','Event artwork','poster',900,1272],
+  ['assets/gallery-vuka-tables.webp','Vuka 4.0 table layout','Event artwork','poster',900,1272]
+].map(([src,alt,caption,style,width,height])=>`<figure class="${style}"><img src="${src}" alt="${alt}" loading="lazy" decoding="async" width="${width}" height="${height}"><figcaption>${caption}</figcaption></figure>`).join('');
 if($('events')){
   const genres=['All',...new Set(EVENTS.map(e=>e.genre))];
   const show=g=>{$('events').innerHTML=EVENTS.filter(e=>g==='All'||e.genre===g).map(evRow).join('');
