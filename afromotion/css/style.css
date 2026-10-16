@@ -144,7 +144,7 @@ footer nav a:hover{color:var(--paper)}
 .hero{background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.58)),url('../assets/kl-bg-phone.webp')}
 .hero img{width:min(70%,320px);order:-1}
 .head{padding-bottom:.75rem}
-.head+section{padding-top:.75rem}
+.head+section{padding-top:calc(4vw + 2.5rem)}
 .event-feature .wrap{grid-template-columns:1fr}
 .event-feature img{width:min(75%,320px)}
 .gallery{grid-template-columns:1fr}
