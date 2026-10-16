@@ -11,6 +11,8 @@ The site includes Home, Events, Artists, Gallery, Merch, Quiz, About and
 Contact pages. The 25-question artist quiz runs entirely in the browser.
 The theme selector offers Dark, Light, Ocean Breeze and Sunset Serenity, and
 saves the selection in the browser.
+Contact links include Instagram and the Afromotion WhatsApp community; events
+and artist pages link to event registration and team sign-up forms.
 
 ## Preview locally
 

@@ -86,6 +86,7 @@ section{padding-block:5rem}
 .founders{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3rem;align-items:center}
 .founders>img{width:100%;max-height:650px;object-fit:cover}
 .profile-copy p+p{margin-top:1rem}
+.profile-copy p+h3{margin-top:1.25rem}
 .contributors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:2rem}
 .contributors article{border-top:2px solid var(--ring);padding-top:1rem}
 .gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
@@ -141,6 +142,8 @@ footer nav a:hover{color:var(--paper)}
 .hero{min-height:0}
 .hero{background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.58)),url('../assets/kl-bg-phone.webp')}
 .hero img{width:min(70%,320px);order:-1}
+.head{padding-bottom:.75rem}
+.head+section{padding-top:.75rem}
 .event-feature .wrap{grid-template-columns:1fr}
 .event-feature img{width:min(75%,320px)}
 .gallery{grid-template-columns:1fr}

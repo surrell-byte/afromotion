@@ -134,6 +134,7 @@ section{padding-block:5rem}
 .founders{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3rem;align-items:center}
 .founders>img{width:100%;max-height:650px;object-fit:cover}
 .profile-copy p+p{margin-top:1rem}
+.profile-copy p+h3{margin-top:1.25rem}
 .contributors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:2rem}
 .contributors article{border-top:2px solid var(--ring);padding-top:1rem}
 .gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
@@ -189,6 +190,8 @@ footer nav a:hover{color:var(--paper)}
 .hero{min-height:0}
 .hero{background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.58)),url('../assets/kl-bg-phone.webp')}
 .hero img{width:min(70%,320px);order:-1}
+.head{padding-bottom:.75rem}
+.head+section{padding-top:.75rem}
 .event-feature .wrap{grid-template-columns:1fr}
 .event-feature img{width:min(75%,320px)}
 .gallery{grid-template-columns:1fr}
@@ -350,7 +353,7 @@ EOF
 
 # ---------------------------------------------------------------- HTML
 HEAD1='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'
-HEAD2='</title><script>const t=localStorage.getItem("afromotion-theme");document.documentElement.dataset.theme=["dark","light","ocean","sunset"].includes(t)?t:"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=9"><script src="js/main.js?v=9" defer></script></head>'
+HEAD2='</title><script>const t=localStorage.getItem("afromotion-theme");document.documentElement.dataset.theme=["dark","light","ocean","sunset"].includes(t)?t:"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=10"><script src="js/main.js?v=10" defer></script></head>'
 
 { printf '%s' "$HEAD1"; printf '%s' 'Afromotion | Afro sound, live in Kuala Lumpur'; printf '%s' "$HEAD2"; cat <<'EOF'
 <body data-page="index"><header id="top"></header><main>
@@ -398,6 +401,7 @@ EOF
 <section class="light"><div class="wrap">
   <div class="chips" id="chips" aria-label="Filter events by genre"></div>
   <div id="events"></div>
+  <p class="more"><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfQC8eCt1DEnzn9hhphoHPb_hJdFJa59De1ORRLXdsypekGtw/closedform?pli=1" target="_blank" rel="noopener noreferrer">Register for an event</a></p>
 </div></section>
 </main><footer id="foot"></footer></body></html>
 EOF
@@ -413,7 +417,7 @@ EOF
 <section class="light"><div class="wrap">
   <h2>Want to perform with us?</h2>
   <p>Send us a link to your music and a few lines about your sound.</p>
-  <p class="more"><a class="btn" href="contact.html">Get in touch</a></p>
+  <p class="more"><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfWT_cY_lCKaKW-yvIfQasSVsxBiD6dR3Fmvhb6MfXSwaF3MQ/viewform" target="_blank" rel="noopener noreferrer">Join the team</a> <a class="btn ghost" href="contact.html">Get in touch</a></p>
 </div></section>
 </main><footer id="foot"></footer></body></html>
 EOF
@@ -476,6 +480,8 @@ EOF
     <p>Singaporean DJ, Afromotion co-founder and resident DJ, known as the #1 Amapiano Loving Queen.</p>
     <h3>Saint Ben</h3>
     <p>Afromotion co-founder, international events manager and entrepreneur.</p>
+    <h3>Olivia Thompson</h3>
+    <p>Key contributor and long-term member of Afromotion.</p>
   </div>
 </div></section>
 <section class="dark"><div class="wrap">
@@ -483,9 +489,6 @@ EOF
   <div class="contributors">
     <article><h3>DJ Pedro OIE</h3><p>Resident DJ, key contributor and long-term member of Afromotion.</p></article>
     <article><h3>DJ Sabrina</h3><p>Resident DJ and Afromotion co-founder Darling Sabrina.</p></article>
-  </div>
-  <div class="contributors">
-    <article><h3>Olivia Thompson</h3><p>Key contributor and long-term member of Afromotion.</p></article>
   </div>
 </div></section>
 </main><footer id="foot"></footer></body></html>
@@ -506,7 +509,9 @@ EOF
   </form>
   <div>
     <h3>Email</h3><p>hello@afromotion.my</p>
-    <h3>Instagram</h3><p>@afromotion.my</p>
+    <h3>Instagram</h3><p><a href="https://www.instagram.com/afromotion.my/" target="_blank" rel="noopener noreferrer">@afromotion.my</a></p>
+    <h3>WhatsApp</h3><p><a href="https://chat.whatsapp.com/IAi0Buv0yiCJoQYsTALhwL?utm_source=ig&amp;utm_medium=social&amp;utm_content=link_in_bio&amp;fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAafCaODB1TxM9svgQGRpdqAD9LkDrig98skl8z3MPXJZ6Cp0n85NGxgqR4tW1A_aem_Nq_6H8v2apRK1310I6hDLg" target="_blank" rel="noopener noreferrer">Join the Afromotion WhatsApp community</a></p>
+    <p class="more"><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfWT_cY_lCKaKW-yvIfQasSVsxBiD6dR3Fmvhb6MfXSwaF3MQ/viewform" target="_blank" rel="noopener noreferrer">Join the team</a></p>
     <h3>Based in</h3><p>Kuala Lumpur, Malaysia</p>
   </div>
 </div></section>
