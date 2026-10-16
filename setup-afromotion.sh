@@ -167,8 +167,11 @@ textarea{min-height:9rem}
 .quiz-progress{display:block;width:100%;height:.75rem;margin:1rem 0 2rem;accent-color:var(--accent)}
 .quiz-round{color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.1em}
 .quiz-options{display:grid;gap:.75rem;margin:1.5rem 0;border:0}
-.quiz-option{display:flex;grid-template-columns:auto 1fr;align-items:center;gap:.75rem;border:2px solid var(--ring);padding:.9rem 1rem;cursor:pointer}
-.quiz-option:has(input:checked){border-color:currentColor;background:color-mix(in srgb,var(--paper) 10%,transparent)}
+.quiz-option{display:flex;grid-template-columns:auto 1fr;align-items:center;gap:.75rem;border:2px solid var(--ring);padding:.9rem 1rem;cursor:pointer;transition:border-color .18s,background-color .18s,box-shadow .18s}
+.quiz-option:has(input:checked:not(:disabled)){border-color:currentColor;background:color-mix(in srgb,var(--paper) 10%,transparent)}
+.quiz-option.is-correct,.quiz-option.is-incorrect{color:var(--ink);border-color:var(--quiz-state-color);background:color-mix(in srgb,var(--quiz-state-color) 24%,var(--paper));box-shadow:0 0 0 1px var(--quiz-state-color),0 0 1.1rem color-mix(in srgb,var(--quiz-state-color) 48%,transparent)}
+.quiz-option.is-correct{--quiz-state-color:#22c55e}
+.quiz-option.is-incorrect{--quiz-state-color:#ef4444}
 .quiz-option input{accent-color:var(--accent)}
 .quiz-feedback{min-height:2rem;margin-block:1rem}
 .quiz-actions{display:flex;gap:1rem;flex-wrap:wrap}
@@ -323,9 +326,15 @@ if($('quiz')){
       e.preventDefault();
       const selected=Number(new FormData(form).get('answer'));
       if(!Number.isInteger(selected))return;
-      const correct=selected===QUIZ[questionIndex][3];
+      const correctAnswer=QUIZ[questionIndex][3];
+      const correct=selected===correctAnswer;
       if(correct)score++;
-      form.querySelectorAll('input').forEach(input=>input.disabled=true);
+      form.querySelectorAll('.quiz-option').forEach((option,i)=>{
+        const input=option.querySelector('input');
+        input.disabled=true;
+        if(i===correctAnswer)option.classList.add('is-correct');
+        else if(i===selected)option.classList.add('is-incorrect');
+      });
       $('quiz-feedback').textContent=correct
         ?'Correct!'
         :`Not quite. The answer is ${String.fromCharCode(65+QUIZ[questionIndex][3])}. ${options[QUIZ[questionIndex][3]]}.`;
@@ -354,7 +363,7 @@ EOF
 
 # ---------------------------------------------------------------- HTML
 HEAD1='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'
-HEAD2='</title><script>const t=localStorage.getItem("afromotion-theme");document.documentElement.dataset.theme=["dark","light","ocean","sunset"].includes(t)?t:"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=13"><script src="js/main.js?v=13" defer></script></head>'
+HEAD2='</title><script>const t=localStorage.getItem("afromotion-theme");document.documentElement.dataset.theme=["dark","light","ocean","sunset"].includes(t)?t:"dark"</script><link rel="icon" href="assets/favicon.webp" type="image/webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css?v=14"><script src="js/main.js?v=14" defer></script></head>'
 
 { printf '%s' "$HEAD1"; printf '%s' 'Afromotion | Afro sound, live in Kuala Lumpur'; printf '%s' "$HEAD2"; cat <<'EOF'
 <body data-page="index"><header id="top"></header><main>

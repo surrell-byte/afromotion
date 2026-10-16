@@ -105,9 +105,15 @@ if($('quiz')){
       e.preventDefault();
       const selected=Number(new FormData(form).get('answer'));
       if(!Number.isInteger(selected))return;
-      const correct=selected===QUIZ[questionIndex][3];
+      const correctAnswer=QUIZ[questionIndex][3];
+      const correct=selected===correctAnswer;
       if(correct)score++;
-      form.querySelectorAll('input').forEach(input=>input.disabled=true);
+      form.querySelectorAll('.quiz-option').forEach((option,i)=>{
+        const input=option.querySelector('input');
+        input.disabled=true;
+        if(i===correctAnswer)option.classList.add('is-correct');
+        else if(i===selected)option.classList.add('is-incorrect');
+      });
       $('quiz-feedback').textContent=correct
         ?'Correct!'
         :`Not quite. The answer is ${String.fromCharCode(65+QUIZ[questionIndex][3])}. ${options[QUIZ[questionIndex][3]]}.`;
